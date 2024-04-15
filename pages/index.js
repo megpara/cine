@@ -1,8 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 
 export default function Home() {
+    const targetRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+      target: targetRef,
+    });
+
+    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        console.log("Page scroll: ", latest);
+    });
+
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
         let sections = gsap.utils.toArray(".panel");
