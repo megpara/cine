@@ -1,11 +1,13 @@
 import "../app/globals.css";
 import Head from "next/head";
+import Header from "../components/Header";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
         <title>Colin Lupe</title>
+        <link rel="icon" href="/favicon.png" />
         <meta
           name="description"
           content="Colin Lupe is a director, DP, cinematographer, and editor based in Los Angeles."
@@ -23,6 +25,7 @@ function MyApp({ Component, pageProps }) {
         />
         <meta property="og:image" content="" />
       </Head>{" "}
+      <Header />
           <Component {...pageProps} />
     </>
   );
