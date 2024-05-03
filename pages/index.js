@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import Button from "../components/Button";
 
 export default function Home() {
     const targetRef = useRef(null);
@@ -10,6 +11,7 @@ export default function Home() {
       target: targetRef,
     });
 
+    const [showScroll, setShowScroll] = useState(true);
     const [playCreator, setPlayCreator] = useState(false);
     const [playDirector, setPlayDirector] = useState(false);
     const [playCine, setPlayCine] = useState(false);
@@ -31,6 +33,11 @@ export default function Home() {
 
     const x = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        if ( latest == 0 ) {
+            setShowScroll(true);
+        } else {
+            setShowScroll(false);
+        }
         if ( latest > 0.08 && latest < 0.2) {
             setShowMonitor(true);
         } else {
@@ -169,8 +176,18 @@ export default function Home() {
     }, [])
     return (
         <div className="container flex w-[532vw] max-w-[532vw] overflow-x-hidden overflow-y-auto">
+
+            {/* CROP */}
+
+            <div className="fixed w-screen top-0 bg-black z-20 h-[60px]"></div>
+            <div className="fixed w-screen bottom-0 bg-black z-20 h-[60px]"></div>
+
+            {/* SCROLL  */}
+            {showScroll && <Button>Scroll</Button>}
+
             {/* STILL IMAGES */}
-            <img src="stills/crop.png" className="absolute w-full h-full top-0 left-0 z-20" />
+            
+            {/* <img src="stills/crop.png" className="absolute w-full h-full top-0 left-0 z-20" /> */}
             {showOverhead1 && <img src="stills/overhead1.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>}
             {showOverhead2 && <img src="stills/overhead2.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>}
             {showOverhead3 && <img src="stills/overhead3.png" className="absolute top-0 left-0 w-screen h-screen object-cover object-right z-30"/>}
@@ -189,7 +206,7 @@ export default function Home() {
             {/* MENUS */}
 
             {/* CREATOR */}
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 p-16" + (playCreator ? " opacity-100" : " opacity-0")}>
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 px-16 py-24" + (playCreator ? " opacity-100" : " opacity-0")}>
                 <div className="flex flex-col justify-between">
                     <Link href="">Non Essentials</Link>
                 </div>
@@ -199,7 +216,7 @@ export default function Home() {
             </div>
 
             {/* DIRECTOR */}
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 p-16" + (playDirector ? " opacity-100" : " opacity-0")}>
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 px-16 py-24" + (playDirector ? " opacity-100" : " opacity-0")}>
                 <div className="flex flex-col justify-between">
                     <Link href="">Olipop</Link>
                     <Link href="">Nike</Link>
@@ -210,7 +227,7 @@ export default function Home() {
             </div>
 
             {/* CINEMATOGRAPHER */}
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 p-16" + (playCine ? " opacity-100" : " opacity-0")}>
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 px-16 py-24" + (playCine ? " opacity-100" : " opacity-0")}>
                 <div className="flex flex-col justify-between">
                     <Link href="">BS High</Link>
                     <Link href="">Bon Jovi</Link>
@@ -222,7 +239,7 @@ export default function Home() {
             </div>
 
             {/* EDITOR */}
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 p-16" + (playEditor ? " opacity-100" : " opacity-0")}>
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 px-16 py-24" + (playEditor ? " opacity-100" : " opacity-0")}>
                 <div className="flex flex-col justify-between">
                     <Link href="">Olympics</Link>
                     <Link href="">Trailers</Link>
@@ -238,9 +255,17 @@ export default function Home() {
             {/* CREATOR */}
             <div className="panel w-[133vw] h-screen relative">
                 <div className="absolute top-0 left-0 w-full h-full flex">
-                    <div className="bg-gray-500 text-white w-[33vw] h-screen flex flex-col items-center justify-center font-display">Creator Title</div>
-                    <div className="w-[100vw] h-screen relative">
-                        <div className="absolute w-full h-full top-0 left-0 text-white reel flex flex-col items-center justify-center font-display">Creator Reel</div>
+                    {/* CREATOR TITLE */}
+                    <div className="w-[33vw] h-screen relative">
+                        <video className="absolute top-0 left-0 w-full h-full object-cover border-x-[5px] border-black" muted autoPlay loop playsInline src="/editing_banner.mp4" />
+                    </div>
+                    <div className="w-[100vw] h-screen reel relative">
+                        {/* CREATOR STILL */}
+                        <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline src="/editing_still.mp4" />
+                        {/* CREATOR REEL */}
+                        {playCreator && (
+                            <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline src="/editing_reel.mp4" />
+                        )}
                     </div>
                 </div>
             </div>
