@@ -4,12 +4,23 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Button from "../components/Button";
+import WatchCursor from "../components/WatchCursor";
 
 export default function Home() {
     const targetRef = useRef(null);
     const { scrollYProgress } = useScroll({
       target: targetRef,
     });
+
+    const [showCursor, setShowCursor] = useState(false);
+
+    const handleMouseEnter = () => {
+        setShowCursor(true);
+    };
+
+    const handleMouseLeave = () => {
+        setShowCursor(false);
+    };
 
     const [showScroll, setShowScroll] = useState(true);
     const [playCreator, setPlayCreator] = useState(false);
@@ -183,7 +194,12 @@ export default function Home() {
             <div className="fixed w-screen bottom-0 bg-black z-20 h-[60px]"></div>
 
             {/* SCROLL  */}
+
             {showScroll && <Button>Scroll</Button>}
+
+            {/* CURSOR */}
+
+            {showCursor && <WatchCursor />}
 
             {/* STILL IMAGES */}
             
@@ -206,49 +222,58 @@ export default function Home() {
             {/* MENUS */}
 
             {/* CREATOR */}
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 px-16 py-24" + (playCreator ? " opacity-100" : " opacity-0")}>
+            
+            {playCreator && (
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
                 <div className="flex flex-col justify-between">
-                    <Link href="">Non Essentials</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Non Essentials</Link>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <Link href="">Settling</Link>
+                    <a href="https://www.settlingtheshow.com/" target="_blank" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Settling</a>
                 </div>
             </div>
-
+            )}
+            
             {/* DIRECTOR */}
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 px-16 py-24" + (playDirector ? " opacity-100" : " opacity-0")}>
+            {playDirector && (
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
                 <div className="flex flex-col justify-between">
-                    <Link href="">Olipop</Link>
-                    <Link href="">Nike</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Olipop</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Nike</Link>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <Link href="">Movement</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Movement</Link>
                 </div>
             </div>
-
+            )}
+            
             {/* CINEMATOGRAPHER */}
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 px-16 py-24" + (playCine ? " opacity-100" : " opacity-0")}>
+            {playCine && (
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
                 <div className="flex flex-col justify-between">
-                    <Link href="">BS High</Link>
-                    <Link href="">Bon Jovi</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">BS High</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Bon Jovi</Link>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <Link href="">Milquetoast</Link>
-                    <Link href="">Naked Cashmere</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Milquetoast</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Naked Cashmere</Link>
                 </div>
             </div>
+            )}
 
             {/* EDITOR */}
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-40 px-16 py-24" + (playEditor ? " opacity-100" : " opacity-0")}>
+            {playEditor && (
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
                 <div className="flex flex-col justify-between">
-                    <Link href="">Olympics</Link>
-                    <Link href="">Trailers</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Olympics</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Trailers</Link>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <Link href="">Lizzo</Link>
-                    <Link href="">Meta</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Lizzo</Link>
+                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Meta</Link>
                 </div>
             </div>
+            )}
             
             {/* TITLES AND REELS */}
 
