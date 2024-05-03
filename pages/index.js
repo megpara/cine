@@ -216,8 +216,8 @@ export default function Home() {
             {showWiz1 && <img src="stills/wiz1.png" className="absolute top-0 left-0 w-screen h-screen object-cover object-right z-30"/>}
             {showWiz2 && <img src="stills/wiz2.png" className="absolute top-0 left-0 w-screen h-screen object-cover object-right z-30"/>}
             {showLizzo && <img src="stills/lizzo.png" className="absolute top-0 left-0 w-screen h-screen object-cover object-right z-30"/>}
-            {showMonitor && <video autoPlay muted loop src="stills/Monitor-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
-            {showTv && <video autoPlay muted loop src="stills/TV-1-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
+            {showMonitor && <video autoPlay muted loop playsInline src="stills/Monitor-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
+            {showTv && <video autoPlay muted loop playsInline src="stills/TV-1-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
 
             {/* MENUS */}
 
