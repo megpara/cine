@@ -5,6 +5,7 @@ import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Button from "../components/Button";
 import WatchCursor from "../components/WatchCursor";
+import MovementModal from "../components/videoModals/MovementModal";
 
 export default function Home() {
     const targetRef = useRef(null);
@@ -185,7 +186,16 @@ export default function Home() {
         gsap.from(".panel", { duration: 1, opacity: 0, y: 50, delay: 0.5 });
         
     }, [])
+
+    // WATCH MODALS
+    const [movementOpen, setMovementOpen] = useState(false);
+
+    const toggleMovement = () => {
+        setMovementOpen(!movementOpen);
+    };
+
     return (
+        <div>
         <div className="container flex w-[532vw] max-w-[532vw] overflow-x-hidden overflow-y-auto">
 
             {/* CROP */}
@@ -242,7 +252,7 @@ export default function Home() {
                     <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Nike</Link>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Movement</Link>
+                    <button onClick={() => toggleMovement()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Movement</button>
                 </div>
             </div>
             )}
@@ -349,6 +359,8 @@ export default function Home() {
                 </div>
             </div>
     
+        </div>
+        <MovementModal open={movementOpen} toggle={toggleMovement} />
         </div>
     )
 }
