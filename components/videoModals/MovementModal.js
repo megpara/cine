@@ -46,8 +46,8 @@ export default function MovementModal({ open, toggle }) {
             </div>
 
             <div className="content flex flex-col items-center justify-center z-60 w-screen h-screen">
-                <div className="w-3/4 cursor-default" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                    <div className="relative w-full pt-[56.25%]">
+                <div className="w-1/2">
+                    <div className="relative w-full pt-[56.25%] pb-12 px-12" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         <iframe
                             src="https://player.vimeo.com/video/913127909?h=fa45fe90a1&badge=0&autopause=0&player_id=0&app_id=58479"
                             frameBorder="0"
@@ -56,7 +56,7 @@ export default function MovementModal({ open, toggle }) {
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>
-                    <div className="text-sm text-black font-display uppercase leading-8 pt-12 text-center"><div className="text-lg">DAM</div><div className="text-[#2700f9]">Director, DP, Editor: Colin Lupe</div>Dancer: Megan Paradowski</div>
+                    <div className="text-sm text-black font-display uppercase leading-8 text-center"><div className="text-lg">Dam</div><div className="text-[#2700f9]">Director, DP, Editor: Colin Lupe</div>Dancer: Megan Paradowski</div>
                 </div>
             </div>
 

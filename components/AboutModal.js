@@ -42,7 +42,7 @@ export default function AboutModal({ open, toggle }) {
             </motion.div>
 
             <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="cursor-auto">
-                <HeaderBlack toggle={toggle} />
+                <HeaderBlack toggle={toggle} aboutOpen={open} />
             </div>
 
             <div className="content flex flex-col items-center justify-center z-60 w-screen h-screen">
