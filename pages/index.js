@@ -6,6 +6,7 @@ import Link from "next/link";
 import Button from "../components/Button";
 import WatchCursor from "../components/WatchCursor";
 import MovementModal from "../components/videoModals/MovementModal";
+import Image from "next/image";
 
 export default function Home() {
     const targetRef = useRef(null);
@@ -213,21 +214,23 @@ export default function Home() {
 
             {/* STILL IMAGES */}
             
+            <div className="absolute top-0 left-0 w-screen h-screen z-30">
             {/* <img src="stills/crop.png" className="absolute w-full h-full top-0 left-0 z-20" /> */}
-            {showOverhead1 && <img src="stills/overhead1.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>}
-            {showOverhead2 && <img src="stills/overhead2.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>}
-            {showOverhead3 && <img src="stills/overhead3.png" className="absolute top-0 left-0 w-screen h-screen object-cover object-right z-30"/>}
-            {showTds1 && <img src="stills/tds1.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>}
-            {showTds2 && <img src="stills/tds2.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>}
-            {showTds3 && <img src="stills/tds3.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>}
-            {/* {showDj1 && <img src="stills/dj1.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>}
-            {showDj2 && <img src="stills/dj2.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>}
-            {showDj3 && <img src="stills/dj3.png" className="absolute top-0 left-0 w-screen h-screen object-cover z-30"/>} */}
-            {showWiz1 && <img src="stills/wiz1.png" className="absolute top-0 left-0 w-screen h-screen object-cover object-right z-30"/>}
-            {showWiz2 && <img src="stills/wiz2.png" className="absolute top-0 left-0 w-screen h-screen object-cover object-right z-30"/>}
-            {showLizzo && <img src="stills/lizzo.png" className="absolute top-0 left-0 w-screen h-screen object-cover object-right z-30"/>}
+            {showOverhead1 && <Image src="/stills/overhead1.png" fill className="object-cover"/>}
+            {showOverhead2 && <Image src="/stills/overhead2.png" fill className="object-cover"/>}
+            {showOverhead3 && <Image src="/stills/overhead3.png" fill className="object-cover object-right"/>}
+            {showTds1 && <Image src="/stills/tds1.png" fill className="object-cover"/>}
+            {showTds2 && <Image src="/stills/tds2.png" fill className="object-cover"/>}
+            {showTds3 && <Image src="/stills/tds3.png" fill className="object-cover"/>}
+            {/* {showDj1 && <img src="stills/dj1.png" fill/>}
+            {showDj2 && <img src="stills/dj2.png" fill/>}
+            {showDj3 && <img src="stills/dj3.png" fill/>} */}
+            {showWiz1 && <Image src="/stills/wiz1.png" fill className="object-cover object-right"/>}
+            {showWiz2 && <Image src="/stills/wiz2.png" fill className="object-cover object-right"/>}
+            {showLizzo && <Image src="/stills/lizzo.png" fill className="object-cover object-right"/>}
             {showMonitor && <video autoPlay muted loop playsInline src="stills/Monitor-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
             {showTv && <video autoPlay muted loop playsInline src="stills/TV-1-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
+            </div>
 
             {/* MENUS */}
 
@@ -253,6 +256,7 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col justify-between items-end">
                     <button onClick={() => toggleMovement()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Movement</button>
+                    <button onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Well Done</button>
                 </div>
             </div>
             )}
