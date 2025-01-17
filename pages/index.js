@@ -6,7 +6,7 @@ import Link from "next/link";
 import Button from "../components/Button";
 import WatchCursor from "../components/WatchCursor";
 import MovementModal from "../components/videoModals/MovementModal";
-import Image from "next/image";
+import NextImage from "next/image";
 
 export default function Home() {
     const targetRef = useRef(null);
@@ -23,6 +23,47 @@ export default function Home() {
     const handleMouseLeave = () => {
         setShowCursor(false);
     };
+
+    const [loadingProgress, setLoadingProgress] = useState(0);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    const assets = [
+        "/stills/overhead1.png",
+        "/stills/overhead2.png",
+        "/stills/overhead3.png",
+        "/stills/tds1.png",
+        "/stills/tds2.png",
+        "/stills/tds3.png",
+        "/stills/wiz1.png",
+        "/stills/wiz2.png",
+        "/stills/lizzo.png",
+        "/stills/Monitor-hevc-safari.mp4",
+        "/stills/TV-1-hevc-safari.mp4",
+    ];
+
+    useEffect(() => {
+        let loadedAssets = 0;
+
+        const handleAssetLoad = () => {
+            loadedAssets += 1;
+            setLoadingProgress(Math.round((loadedAssets / assets.length) * 100));
+            if (loadedAssets === assets.length) {
+                setTimeout(() => setIsLoaded(true), 500); // Slight delay for a smoother transition
+            }
+        };
+
+        assets.forEach((asset) => {
+            if (asset.endsWith(".mp4")) {
+                const video = document.createElement("video");
+                video.src = asset;
+                video.onloadeddata = handleAssetLoad;
+            } else {
+                const img = new Image();
+                img.src = asset;
+                img.onload = handleAssetLoad;
+            }
+        });
+    }, []);
 
     const [showScroll, setShowScroll] = useState(true);
     const [playCreator, setPlayCreator] = useState(false);
@@ -164,29 +205,33 @@ export default function Home() {
     });
 
     useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        let sections = gsap.utils.toArray(".panel");
-        const containerWidth = document.querySelector(".container").offsetWidth;
-
-        gsap.to(sections, {
-            xPercent: -100 * 3.2475,
-            ease: "none",
-            duration: 0.5,
-            scrollTrigger: {
-                trigger: document.querySelector(".container"),
-                pin: true,
-                scrub: 1,
-                snap: {
-                    snapTo: [0, 0.07644, 0.3844, 0.69236, 1],
-                    // directional: false,
-                },
-                end: `+=${containerWidth}`,
-                // onUpdate: (self) => document.getElementById("white").style.width = ((self.progress * 100 / 4) + "%"),
-            },
-        })
-        gsap.from(".panel", { duration: 1, opacity: 0, y: 50, delay: 0.5 });
-        
-    }, [])
+        const checkLoadingInterval = setInterval(() => {
+            if (isLoaded) {
+                gsap.registerPlugin(ScrollTrigger);
+                let sections = gsap.utils.toArray(".panel");
+                const containerWidth = document.querySelector(".container").offsetWidth;
+    
+                gsap.to(sections, {
+                    xPercent: -100 * 3.2475,
+                    ease: "none",
+                    duration: 0.5,
+                    scrollTrigger: {
+                        trigger: document.querySelector(".container"),
+                        pin: true,
+                        scrub: 1,
+                        snap: {
+                            snapTo: [0, 0.07644, 0.3844, 0.69236, 1],
+                        },
+                        end: `+=${containerWidth}`,
+                    },
+                });
+                gsap.from(".panel", { duration: 1, opacity: 0, y: 50, delay: 0.5 });
+    
+                // Clear the interval after loading is complete
+                clearInterval(checkLoadingInterval);
+            }
+        }, 100); // Check every 100ms until `isLoaded` is true
+    }, [isLoaded]);    
 
     // WATCH MODALS
     const [movementOpen, setMovementOpen] = useState(false);
@@ -194,6 +239,20 @@ export default function Home() {
     const toggleMovement = () => {
         setMovementOpen(!movementOpen);
     };
+
+    if (!isLoaded) {
+        return (
+            <div className="fixed inset-0 flex flex-col items-center justify-center bg-black text-white">
+                <div className="text-base uppercase font-display">Loading {loadingProgress}%</div>
+                <div className="w-64 h-2 bg-gray-800 rounded-full mt-4 overflow-hidden">
+                    <div
+                        className="h-full bg-[#2700f9]"
+                        style={{ width: `${loadingProgress}%` }}
+                    ></div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -216,18 +275,18 @@ export default function Home() {
             
             <div className="absolute top-0 left-0 w-screen h-screen z-30">
             {/* <img src="stills/crop.png" className="absolute w-full h-full top-0 left-0 z-20" /> */}
-            {showOverhead1 && <Image src="/stills/overhead1.png" fill className="object-cover"/>}
-            {showOverhead2 && <Image src="/stills/overhead2.png" fill className="object-cover"/>}
-            {showOverhead3 && <Image src="/stills/overhead3.png" fill className="object-cover object-right"/>}
-            {showTds1 && <Image src="/stills/tds1.png" fill className="object-cover"/>}
-            {showTds2 && <Image src="/stills/tds2.png" fill className="object-cover"/>}
-            {showTds3 && <Image src="/stills/tds3.png" fill className="object-cover"/>}
+            {showOverhead1 && <NextImage src="/stills/overhead1.png" fill className="object-cover"/>}
+            {showOverhead2 && <NextImage src="/stills/overhead2.png" fill className="object-cover"/>}
+            {showOverhead3 && <NextImage src="/stills/overhead3.png" fill className="object-cover object-right"/>}
+            {showTds1 && <NextImage src="/stills/tds1.png" fill className="object-cover"/>}
+            {showTds2 && <NextImage src="/stills/tds2.png" fill className="object-cover"/>}
+            {showTds3 && <NextImage src="/stills/tds3.png" fill className="object-cover"/>}
             {/* {showDj1 && <img src="stills/dj1.png" fill/>}
             {showDj2 && <img src="stills/dj2.png" fill/>}
             {showDj3 && <img src="stills/dj3.png" fill/>} */}
-            {showWiz1 && <Image src="/stills/wiz1.png" fill className="object-cover object-right"/>}
-            {showWiz2 && <Image src="/stills/wiz2.png" fill className="object-cover object-right"/>}
-            {showLizzo && <Image src="/stills/lizzo.png" fill className="object-cover object-right"/>}
+            {showWiz1 && <NextImage src="/stills/wiz1.png" fill className="object-cover object-right"/>}
+            {showWiz2 && <NextImage src="/stills/wiz2.png" fill className="object-cover object-right"/>}
+            {showLizzo && <NextImage src="/stills/lizzo.png" fill className="object-cover object-right"/>}
             {showMonitor && <video autoPlay muted loop playsInline src="stills/Monitor-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
             {showTv && <video autoPlay muted loop playsInline src="stills/TV-1-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
             </div>
