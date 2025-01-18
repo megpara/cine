@@ -42,7 +42,8 @@ export default function Home() {
     };
 
     const [loadingProgress, setLoadingProgress] = useState(0);
-    const [isLoaded, setIsLoaded] = useState(false);
+    // const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(true);
 
     const assets = [
         "/stills/overhead1.png",
@@ -58,40 +59,40 @@ export default function Home() {
         "/stills/TV-1-hevc-safari.mp4",
     ];
 
-    useEffect(() => {
-        let loadedAssets = 0;
+    // useEffect(() => {
+    //     let loadedAssets = 0;
 
-        const handleAssetLoad = () => {
-            loadedAssets += 1;
-            setLoadingProgress(Math.round((loadedAssets / assets.length) * 100));
-            if (loadedAssets === assets.length) {
-                setTimeout(() => setIsLoaded(true), 500); // Slight delay for a smoother transition
-            }
-        };
+    //     const handleAssetLoad = () => {
+    //         loadedAssets += 1;
+    //         setLoadingProgress(Math.round((loadedAssets / assets.length) * 100));
+    //         if (loadedAssets === assets.length) {
+    //             setTimeout(() => setIsLoaded(true), 500); // Slight delay for a smoother transition
+    //         }
+    //     };
 
-        const handleAssetError = (asset) => {
-            console.error(`Failed to load asset: ${asset}`);
-            loadedAssets += 1; // Still count as "loaded" to prevent hanging
-            setLoadingProgress(Math.round((loadedAssets / assets.length) * 100));
-            if (loadedAssets === assets.length) {
-                setTimeout(() => setIsLoaded(true), 500);
-            }
-        };
+    //     const handleAssetError = (asset) => {
+    //         console.error(`Failed to load asset: ${asset}`);
+    //         loadedAssets += 1; // Still count as "loaded" to prevent hanging
+    //         setLoadingProgress(Math.round((loadedAssets / assets.length) * 100));
+    //         if (loadedAssets === assets.length) {
+    //             setTimeout(() => setIsLoaded(true), 500);
+    //         }
+    //     };
 
-        assets.forEach((asset) => {
-            if (asset.endsWith(".mp4")) {
-                const video = document.createElement("video");
-                video.src = asset;
-                video.onloadeddata = handleAssetLoad;
-                video.onerror = () => handleAssetError(asset);
-            } else {
-                const img = new Image();
-                img.src = asset;
-                img.onload = handleAssetLoad;
-                img.onerror = () => handleAssetError(asset);
-            }
-        });
-    }, []);
+    //     assets.forEach((asset) => {
+    //         if (asset.endsWith(".mp4")) {
+    //             const video = document.createElement("video");
+    //             video.src = asset;
+    //             video.onloadeddata = handleAssetLoad;
+    //             video.onerror = () => handleAssetError(asset);
+    //         } else {
+    //             const img = new Image();
+    //             img.src = asset;
+    //             img.onload = handleAssetLoad;
+    //             img.onerror = () => handleAssetError(asset);
+    //         }
+    //     });
+    // }, []);
 
     const [showScroll, setShowScroll] = useState(true);
     const [playCreator, setPlayCreator] = useState(false);
