@@ -1,19 +1,26 @@
 import { use, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { useMotionValue, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Button from "../components/Button";
 import WatchCursor from "../components/WatchCursor";
-import MovementModal from "../components/videoModals/MovementModal";
+import Movement from "../components/videoModals/Movement";
 import NextImage from "next/image";
+import WellDone from "../components/videoModals/WellDone";
+import Olipop from "../components/videoModals/Olipop";
+import Nike from "../components/videoModals/Nike";
+import NonEssentials from "../components/videoModals/NonEssentials";
+import BSHigh from "../components/videoModals/BSHigh";
+import BonJovi from "../components/videoModals/BonJovi";
+import Olympics from "../components/videoModals/Olympics";
+import Trailers from "../components/videoModals/Trailers";
+import Lizzo from "../components/videoModals/Lizzo";
+import Meta from "../components/videoModals/Meta";
 
 export default function Home() {
-    const targetRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-      target: targetRef,
-    });
 
+    const yPosition = useMotionValue(0);
     const [showCursor, setShowCursor] = useState(false);
 
     const handleMouseEnter = () => {
@@ -85,9 +92,8 @@ export default function Home() {
     const [showWiz2, setShowWiz2] = useState(false);
     const [showLizzo, setShowLizzo] = useState(false);
 
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        if ( latest == 0 ) {
+        useMotionValueEvent(yPosition, "change", (latest) => {
+        if ( latest < 0.001 ) {
             setShowScroll(true);
         } else {
             setShowScroll(false);
@@ -222,7 +228,9 @@ export default function Home() {
                         snap: {
                             snapTo: [0, 0.07644, 0.3844, 0.69236, 1],
                         },
+                        start: "top top",
                         end: `+=${containerWidth}`,
+                        onUpdate: (self) => yPosition.set(self.progress),
                     },
                 });
                 gsap.from(".panel", { duration: 1, opacity: 0, y: 50, delay: 0.5 });
@@ -235,9 +243,49 @@ export default function Home() {
 
     // WATCH MODALS
     const [movementOpen, setMovementOpen] = useState(false);
+    const [wellDoneOpen, setWellDoneOpen] = useState(false);
+    const [olipopOpen, setOlipopOpen] = useState(false);
+    const [nikeOpen, setNikeOpen] = useState(false);
+    const [essentialsOpen, setEssentialsOpen] = useState(false);
+    const [bsHighOpen, setBsHighOpen] = useState(false);
+    const [bonJoviOpen, setBonJoviOpen] = useState(false);
+    const [olympicsOpen, setOlympicsOpen] = useState(false);
+    const [trailersOpen, setTrailersOpen] = useState(false);
+    const [lizzoOpen, setLizzoOpen] = useState(false);
+    const [metaOpen, setMetaOpen] = useState(false);
 
     const toggleMovement = () => {
         setMovementOpen(!movementOpen);
+    };
+    const toggleWellDone = () => {
+        setWellDoneOpen(!wellDoneOpen);
+    };
+    const toggleOlipop = () => {
+        setOlipopOpen(!olipopOpen);
+    };
+    const toggleNike = () => {
+        setNikeOpen(!nikeOpen);
+    };
+    const toggleEssentials = () => {
+        setEssentialsOpen(!essentialsOpen);
+    };
+    const toggleBsHighOpen = () => {
+        setBsHighOpen(!bsHighOpen);
+    };
+    const toggleBonJoviOpen = () => {
+        setBonJoviOpen(!bonJoviOpen);
+    };
+    const toggleOlympics = () => {
+        setOlympicsOpen(!olympicsOpen);
+    };
+    const toggleTrailers = () => {
+        setTrailersOpen(!trailersOpen);
+    };
+    const toggleLizzo = () => {
+        setLizzoOpen(!lizzoOpen);
+    };
+    const toggleMeta = () => {
+        setMetaOpen(!metaOpen);
     };
 
     if (!isLoaded) {
@@ -256,7 +304,7 @@ export default function Home() {
 
     return (
         <div>
-        <div className="container flex w-[532vw] max-w-[532vw] overflow-x-hidden overflow-y-auto">
+        <div className="container flex w-[533.32vw] max-w-[533.32vw] overflow-x-hidden overflow-y-auto">
 
             {/* CROP */}
 
@@ -298,7 +346,7 @@ export default function Home() {
             {playCreator && (
             <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
                 <div className="flex flex-col justify-between">
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Non Essentials</Link>
+                    <button onClick={() => toggleEssentials()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">The Non-Essentials</button>
                 </div>
                 <div className="flex flex-col justify-between items-end">
                     <a href="https://www.settlingtheshow.com/" target="_blank" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Settling</a>
@@ -310,12 +358,12 @@ export default function Home() {
             {playDirector && (
             <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
                 <div className="flex flex-col justify-between">
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Olipop</Link>
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Nike</Link>
+                    <button onClick={() => toggleOlipop()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Olipop</button>
+                    <Link href="" onClick={() => toggleNike()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Nike</Link>
                 </div>
                 <div className="flex flex-col justify-between items-end">
                     <button onClick={() => toggleMovement()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Movement</button>
-                    <button onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Well Done</button>
+                    <button onClick={() => toggleWellDone()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Well Done</button>
                 </div>
             </div>
             )}
@@ -324,8 +372,8 @@ export default function Home() {
             {playCine && (
             <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
                 <div className="flex flex-col justify-between">
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">BS High</Link>
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Bon Jovi</Link>
+                    <button onClick={() => toggleBsHighOpen()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">BS High</button>
+                    <button onClick={() => toggleBonJoviOpen()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Bon Jovi</button>
                 </div>
                 <div className="flex flex-col justify-between items-end">
                     <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Milquetoast</Link>
@@ -338,12 +386,12 @@ export default function Home() {
             {playEditor && (
             <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
                 <div className="flex flex-col justify-between">
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Olympics</Link>
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Trailers</Link>
+                    <button onClick={() => toggleOlympics()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Olympics</button>
+                    <button onClick={() => toggleTrailers()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Trailers</button>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Lizzo</Link>
-                    <Link href="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Meta</Link>
+                    <button onClick={() => toggleLizzo()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Lizzo</button>
+                    <button onClick={() => toggleMeta()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Meta</button>
                 </div>
             </div>
             )}
@@ -423,7 +471,17 @@ export default function Home() {
             </div>
     
         </div>
-        <MovementModal open={movementOpen} toggle={toggleMovement} />
+        <Movement open={movementOpen} toggle={toggleMovement} />
+        <WellDone open={wellDoneOpen} toggle={toggleWellDone} />
+        <Olipop open={olipopOpen} toggle={toggleOlipop} />
+        <Nike open={nikeOpen} toggle={toggleNike} />
+        <NonEssentials open={essentialsOpen} toggle={toggleEssentials} />
+        <BSHigh open={bsHighOpen} toggle={toggleBsHighOpen} />
+        <BonJovi open={bonJoviOpen} toggle={toggleBonJoviOpen} />
+        <Olympics open={olympicsOpen} toggle={toggleOlympics} />
+        <Trailers open={trailersOpen} toggle={toggleTrailers} />
+        <Lizzo open={lizzoOpen} toggle={toggleLizzo} />
+        <Meta open={metaOpen} toggle={toggleMeta} />
         </div>
     )
 }

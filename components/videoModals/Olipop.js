@@ -1,12 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
-import HeaderBlack from "../HeaderBlack";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import gsap from "gsap";
-import Footer from "../Footer";
 import CloseCursor from "../CloseCursor";
 
-export default function MovementModal({ open, toggle }) {
+export default function Olipop({ open, toggle }) {
     const [closeCursorOpen, setCloseCursorOpen] = useState(true);
 
     useEffect(() => {
@@ -25,7 +22,7 @@ export default function MovementModal({ open, toggle }) {
     return (
         <AnimatePresence>
         {open && (
-        <div className="fixed top-0 right-0 w-full h-full text-white z-50 cursor-none" onClick={() => toggle()}>
+        <div className="fixed top-0 right-0 w-full h-full text-white z-50 cursor-none " onClick={() => toggle()}>
           <motion.div
             initial={{ width: "0%" }}
             animate={{
@@ -34,34 +31,36 @@ export default function MovementModal({ open, toggle }) {
             }}
             exit={{
               width: "0%",
-              transition: { duration: 0.2, delay: 0.2 },
+              transition: { duration: 0.2, delay: 0.3 },
             }}
-            className="fixed top-0 right-0 h-screen bg-white"
+            className="fixed top-0 right-0 h-screen bg-black opacity-95"
             id="menu-container"
           >
             </motion.div>
 
-            <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="cursor-auto">
-                <HeaderBlack toggle={toggle} />
-            </div>
-
             <div className="content flex flex-col items-center justify-center z-60 w-screen h-screen">
-                <div className="w-1/2">
+                <motion.div 
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 50, transition: { duration: 0.5 } }}
+                    className="w-3/4 md:w-1/2">
                     <div className="relative w-full pt-[56.25%] pb-12 px-12" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         <iframe
-                            src="https://player.vimeo.com/video/913127909?h=fa45fe90a1&badge=0&autopause=0&player_id=0&app_id=58479"
+                            src="https://player.vimeo.com/video/912376689?h=104bb6811e&badge=0&autopause=0&player_id=0&app_id=58479&title=0&portrait=0&byline=0"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                             title="DAM"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>
-                    <div className="text-sm text-black font-display uppercase leading-8 text-center"><div className="text-lg">Dam</div><div className="text-[#2700f9]">Director, DP, Editor: Colin Lupe</div>Dancer: Megan Paradowski</div>
-                </div>
-            </div>
-
-            <div className="!text-black cursor-auto" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                <Footer/>
+                    <div className="text-sm font-display uppercase leading-8 text-center">
+                        <div className="text-lg">Olipop</div>
+                        Director: Bronson Farr & Colin Lupe <br />
+                        Photographer: Bronson Farr <br />
+                        Cinematographer: Colin Lupe <br />
+                        Production Company: Sway
+                    </div>
+                </motion.div>
             </div>
 
             {closeCursorOpen && <CloseCursor />}
