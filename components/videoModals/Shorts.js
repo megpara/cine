@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import gsap from "gsap";
 import CloseCursor from "../CloseCursor";
 
-export default function Milquetoast({ open, toggle }) {
+export default function Shorts({ open, toggle }) {
     const [closeCursorOpen, setCloseCursorOpen] = useState(true);
 
     useEffect(() => {
@@ -55,10 +55,9 @@ export default function Milquetoast({ open, toggle }) {
                     </div>
                     <div className="text-sm font-display uppercase leading-8 text-center">
                         <div className="text-lg">Milquetoast</div>
-                        Director: Colin Lupe <br />
-                        Cinematographer: Colin Lupe <br />
-                        Editor: Dustin Muenchow <br />
-                        Production Company: Dirty Robber, Take Care
+                        Director: Eliza Huberth <br />
+                        Director of Photography: Colin Lupe <br />
+                        Editor: Colin Lupe
                     </div>
                 </motion.div>
             </div>

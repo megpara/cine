@@ -18,7 +18,7 @@ import Trailers from "../components/videoModals/Trailers";
 import Lizzo from "../components/videoModals/Lizzo";
 import Meta from "../components/videoModals/Meta";
 import ViewCursor from "../components/ViewCursor";
-import Milquetoast from "../components/videoModals/Milquetoast";
+import Shorts from "../components/videoModals/Shorts";
 import NakedCashmere from "../components/videoModals/NakedCashmere";
 
 export default function Home() {
@@ -263,7 +263,7 @@ export default function Home() {
     const [trailersOpen, setTrailersOpen] = useState(false);
     const [lizzoOpen, setLizzoOpen] = useState(false);
     const [metaOpen, setMetaOpen] = useState(false);
-    const [milquetoastOpen, setMilquetoastOpen] = useState(false);
+    const [shortsOpen, setShortsOpen] = useState(false);
     const [nakedOpen, setNakedOpen] = useState(false);
 
     const toggleMovement = () => {
@@ -299,8 +299,8 @@ export default function Home() {
     const toggleMeta = () => {
         setMetaOpen(!metaOpen);
     };
-    const toggleMilquetoast = () => {
-        setMilquetoastOpen(!milquetoastOpen);
+    const toggleShorts = () => {
+        setShortsOpen(!shortsOpen);
     };
     const toggleNaked = () => {
         setNakedOpen(!nakedOpen);
@@ -395,7 +395,7 @@ export default function Home() {
                     <button onClick={() => toggleBonJoviOpen()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Bon Jovi</button>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <button onClick={() => toggleMilquetoast()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Milquetoast</button>
+                    <button onClick={() => toggleShorts()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Shorts</button>
                     <button onClick={() => toggleNaked()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Naked Cashmere</button>
                 </div>
             </div>
@@ -501,7 +501,7 @@ export default function Home() {
         <Trailers open={trailersOpen} toggle={toggleTrailers} />
         <Lizzo open={lizzoOpen} toggle={toggleLizzo} />
         <Meta open={metaOpen} toggle={toggleMeta} />
-        <Milquetoast open={milquetoastOpen} toggle={toggleMilquetoast} />
+        <Shorts open={shortsOpen} toggle={toggleShorts} />
         <NakedCashmere open={nakedOpen} toggle={toggleNaked} />
         </div>
     )
