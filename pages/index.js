@@ -69,15 +69,26 @@ export default function Home() {
             }
         };
 
+        const handleAssetError = (asset) => {
+            console.error(`Failed to load asset: ${asset}`);
+            loadedAssets += 1; // Still count as "loaded" to prevent hanging
+            setLoadingProgress(Math.round((loadedAssets / assets.length) * 100));
+            if (loadedAssets === assets.length) {
+                setTimeout(() => setIsLoaded(true), 500);
+            }
+        };
+
         assets.forEach((asset) => {
             if (asset.endsWith(".mp4")) {
                 const video = document.createElement("video");
                 video.src = asset;
                 video.onloadeddata = handleAssetLoad;
+                video.onerror = () => handleAssetError(asset);
             } else {
                 const img = new Image();
                 img.src = asset;
                 img.onload = handleAssetLoad;
+                img.onerror = () => handleAssetError(asset);
             }
         });
     }, []);
