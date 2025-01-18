@@ -17,18 +17,26 @@ import Olympics from "../components/videoModals/Olympics";
 import Trailers from "../components/videoModals/Trailers";
 import Lizzo from "../components/videoModals/Lizzo";
 import Meta from "../components/videoModals/Meta";
+import ViewCursor from "../components/ViewCursor";
 
 export default function Home() {
 
     const yPosition = useMotionValue(0);
     const [showCursor, setShowCursor] = useState(false);
+    const [showViewCursor, setShowViewCursor] = useState(false);
 
     const handleMouseEnter = () => {
         setShowCursor(true);
     };
+    const handleMouseEnterView = () => {
+        setShowViewCursor(true);
+    };
 
     const handleMouseLeave = () => {
         setShowCursor(false);
+    };
+    const handleMouseLeaveView = () => {
+        setShowViewCursor(false);
     };
 
     const [loadingProgress, setLoadingProgress] = useState(0);
@@ -318,6 +326,7 @@ export default function Home() {
             {/* CURSOR */}
 
             {showCursor && <WatchCursor />}
+            {showViewCursor && <ViewCursor />}
 
             {/* STILL IMAGES */}
             
@@ -349,7 +358,7 @@ export default function Home() {
                     <button onClick={() => toggleEssentials()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">The Non-Essentials</button>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <a href="https://www.settlingtheshow.com/" target="_blank" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Settling</a>
+                    <a href="https://www.settlingtheshow.com/" target="_blank" onMouseEnter={handleMouseEnterView} onMouseLeave={handleMouseLeaveView} className="hover:cursor-none">Settling</a>
                 </div>
             </div>
             )}
