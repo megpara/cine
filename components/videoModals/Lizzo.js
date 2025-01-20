@@ -38,13 +38,13 @@ export default function Lizzo({ open, toggle }) {
           >
             </motion.div>
 
-            <div className="content flex flex-col items-center justify-center z-60 w-screen h-screen">
+            <div className="content flex flex-col items-center justify-center z-60 w-screen h-full overflow-scroll">
                 <motion.div 
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 50, transition: { duration: 0.5 } }}
-                    className="w-3/4 md:w-1/2">
-                    <div className="relative w-full pt-[56.25%] pb-12 px-12" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                    className="w-3/4 md:w-1/2 py-24 h-full">
+                    <div className="relative w-full pt-[56.25%] pb-6 px-12" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         <iframe
                             src="https://www.youtube.com/embed/HQliEKPg1Qk?si=31FSFQWQH3SiFa2Q"
                             frameBorder="0"
@@ -53,8 +53,20 @@ export default function Lizzo({ open, toggle }) {
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>
-                    <div className="text-sm font-display uppercase leading-8 text-center pt-12">
+                    <div className="text-sm font-display uppercase leading-8 text-center pt-6 pb-12">
                         <div className="text-lg">Boys</div>
+                    </div>
+                    <div className="relative w-full pt-[56.25%] pb-6 px-12" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                    <iframe
+                            src="https://www.youtube.com/embed/9yzsh-PDF30?si=V9ZanI2soUc5AaAC"
+                            frameBorder="0"
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                            title="DAM"
+                            className="absolute top-0 left-0 w-full h-full"
+                        ></iframe>
+                    </div>
+                    <div className="text-sm font-display uppercase leading-8 text-center p6-6 py-12">
+                        <div className="text-lg pb-6">Fitness</div>
                         Director: Quinn Wilson <br />
                         Director of Photography: Andy Madeleine <br />
                         Editor: Colin Lupe
