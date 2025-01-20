@@ -20,7 +20,7 @@ export default function ViewCursor() {
 
     return (
         <div className="cursor" style={{ left: position.x, top: position.y }} aria-label="Watch">
-            View Deck
+            View
         </div>
     )
 }

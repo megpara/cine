@@ -407,7 +407,7 @@ export default function Home() {
                     <button onClick={() => toggleBonJoviOpen()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Bon Jovi</button>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <button onClick={() => toggleShorts()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Shorts</button>
+                    <button onClick={() => toggleShorts()} onMouseEnter={handleMouseEnterView} onMouseLeave={handleMouseLeaveView} className="hover:cursor-none">Shorts</button>
                     <button onClick={() => toggleNaked()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Naked Cashmere</button>
                 </div>
             </div>
