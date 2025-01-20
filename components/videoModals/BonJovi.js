@@ -49,7 +49,7 @@ export default function BonJovi({ open, toggle }) {
                             src="https://www.youtube.com/embed/4QuJ5sBFX9c?si=gcXiapDuM2Isp7nS"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            title="DAM"
+                            title="Bon Jovi"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>

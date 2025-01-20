@@ -43,13 +43,13 @@ export default function WellDone({ open, toggle }) {
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 50, transition: { duration: 0.5 } }}
-                    className="w-3/4 md:w-1/2 overflow-scroll">
+                    className="w-3/4 md:w-1/2">
                     <div className="relative w-full pt-[56.25%] pb-12 px-12" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         <iframe
                             src="https://player.vimeo.com/video/1018092084?h=dad703d479&badge=0&autopause=0&player_id=0&app_id=58479&title=0&portrait=0&byline=0"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            title="DAM"
+                            title="Well Done"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>

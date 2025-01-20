@@ -49,7 +49,7 @@ export default function Lizzo({ open, toggle }) {
                             src="https://www.youtube.com/embed/HQliEKPg1Qk?si=31FSFQWQH3SiFa2Q"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            title="DAM"
+                            title="Boys"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>
@@ -61,7 +61,7 @@ export default function Lizzo({ open, toggle }) {
                             src="https://www.youtube.com/embed/9yzsh-PDF30?si=V9ZanI2soUc5AaAC"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            title="DAM"
+                            title="Fitness"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>

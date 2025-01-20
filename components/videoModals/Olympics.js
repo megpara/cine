@@ -49,7 +49,7 @@ export default function Olympics({ open, toggle }) {
                             src="https://www.youtube.com/embed/GrSmjMWCQkU?si=fnvl0deFz3p4Cl1b"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            title="DAM"
+                            title="Olympics"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>

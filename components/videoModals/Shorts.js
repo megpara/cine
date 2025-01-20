@@ -52,7 +52,7 @@ export default function Shorts({ open, toggle }) {
                         Editor: Colin Lupe
                     </div>
                     <div className="relative w-full pt-[56.25%] pb-6 px-12">
-                        <Image src="/following.png" fill alt="Milquetoast" className="object-cover" />
+                        <Image src="/following.png" fill alt="Following" className="object-cover" />
                     </div>
                     <div className="text-sm font-display uppercase leading-8 text-center pt-6 pb-12">
                         <div className="text-lg">Following - Coming Soon</div>

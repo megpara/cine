@@ -49,7 +49,7 @@ export default function NakedCashmere({ open, toggle }) {
                             src="https://www.youtube.com/embed/oAz0PE2rZWc?si=_BK_jz3WHQ7jF4R2"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            title="DAM"
+                            title="Naked Cashmere"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>

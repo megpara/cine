@@ -64,7 +64,7 @@ export default function Trailers({ open, toggle }) {
                             src="https://player.vimeo.com/video/913122773?h=9eb257f6fa&badge=0&autopause=0&player_id=0&app_id=58479&title=0&portrait=0&byline=0"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            title="DAM"
+                            title="Heist: The Money Plane"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>
@@ -76,7 +76,7 @@ export default function Trailers({ open, toggle }) {
                             src="https://player.vimeo.com/video/913120730?h=2163830fbd&badge=0&autopause=0&player_id=0&app_id=58479&title=0&portrait=0&byline=0"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            title="DAM"
+                            title="Heist: The Bourbon King"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>

@@ -49,7 +49,7 @@ export default function Meta({ open, toggle }) {
                             src="https://player.vimeo.com/video/687216515?h=e19ab69958&badge=0&autopause=0&player_id=0&app_id=58479&title=0&portrait=0&byline=0"
                             frameBorder="0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            title="DAM"
+                            title="Meta"
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>
