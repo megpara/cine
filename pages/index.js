@@ -444,7 +444,7 @@ export default function Home() {
                     {/* CREATOR TITLE */}
                     <div className="w-[33vw] h-screen relative">
                         <video className="absolute top-0 left-0 w-full h-full object-cover border-x-[5px] border-black" muted autoPlay loop playsInline src="/creator_banner.mp4" />
-                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none">Creator</div>
+                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none text-white">Creator</div>
                     </div>
                     <div className="w-[100vw] h-screen reel relative">
                         {/* CREATOR STILL */}
@@ -463,7 +463,7 @@ export default function Home() {
                     {/* DIRECTOR TITLE */}
                     <div className="w-[33vw] h-screen relative">
                         <video className="absolute top-0 left-0 w-full h-full object-cover border-x-[5px] border-black" muted autoPlay loop playsInline src="/director_banner.mp4" />
-                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none">Director</div>
+                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none text-white">Director</div>
                     </div>
                     <div className="w-[100vw] h-screen reel relative">
                         {/* DIRECTOR STILL */}
@@ -482,7 +482,7 @@ export default function Home() {
                     {/* CINEMATOGRAPHER TITLE */}
                     <div className="w-[33vw] h-screen relative">
                         <video className="absolute top-0 left-0 w-full h-full object-cover border-x-[5px] border-black" muted autoPlay loop playsInline src="/cine_banner.mp4" />
-                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none">Cinematographer</div>
+                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none text-white">Cinematographer</div>
                     </div>
                     <div className="w-[100vw] h-screen reel relative">
                         {/* CINEMATOGRAPHER STILL */}
@@ -501,7 +501,7 @@ export default function Home() {
                     {/* EDITOR TITLE */}
                     <div className="w-[33vw] h-screen relative">
                         <video className="absolute top-0 left-0 w-full h-full object-cover border-x-[5px] border-black" muted autoPlay loop playsInline src="/editor_banner.mp4" />
-                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none">Editor</div>
+                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none text-white">Editor</div>
                     </div>
                     <div className="w-[100vw] h-screen reel relative">
                         {/* EDITOR STILL */}
