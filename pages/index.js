@@ -99,6 +99,7 @@ export default function Home() {
     const [playDirector, setPlayDirector] = useState(false);
     const [playCine, setPlayCine] = useState(false);
     const [playEditor, setPlayEditor] = useState(false);
+    const [showCreator, setShowCreator] = useState(false);
     const [showMonitor, setShowMonitor] = useState(false);
     const [showOverhead1, setShowOverhead1] = useState(false);
     const [showOverhead2, setShowOverhead2] = useState(false);
@@ -120,6 +121,13 @@ export default function Home() {
         } else {
             setShowScroll(false);
         }
+
+        if (latest > 0.001 && latest < 0.076) {
+            setShowCreator(true);
+        } else {
+            setShowCreator(false);
+        }
+
         if ( latest > 0.08 && latest < 0.2) {
             setShowMonitor(true);
         } else {
@@ -354,6 +362,7 @@ export default function Home() {
             
             <div className="absolute top-0 left-0 w-screen h-screen z-30">
             {/* <img src="stills/crop.png" className="absolute w-full h-full top-0 left-0 z-20" /> */}
+            {showCreator && <NextImage src="/stills/creator.png" fill className="object-cover"/>}
             {showOverhead1 && <NextImage src="/stills/overhead1.png" fill className="object-cover"/>}
             {showOverhead2 && <NextImage src="/stills/overhead2.png" fill className="object-cover"/>}
             {showOverhead3 && <NextImage src="/stills/overhead3.png" fill className="object-cover object-right"/>}
@@ -439,10 +448,10 @@ export default function Home() {
                     </div>
                     <div className="w-[100vw] h-screen reel relative">
                         {/* CREATOR STILL */}
-                        <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline src="/editing_still.mp4" />
+                        <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline src="/creator_still.mp4" />
                         {/* CREATOR REEL */}
                         {playCreator && (
-                            <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline src="/editing_reel.mp4" />
+                            <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline src="/creator_reel.mp4" />
                         )}
                     </div>
                 </div>
