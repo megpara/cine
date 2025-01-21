@@ -45,19 +45,19 @@ export default function AboutModal({ open, toggle }) {
                 <HeaderBlack toggle={toggle} aboutOpen={open} />
             </div>
 
-            <div className="content flex flex-col items-center z-60 w-screen h-screen overflow-scroll">
+            <div className="content flex flex-col items-center z-60 w-screen h-full overflow-scroll">
                 <motion.div 
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 50, transition: { duration: 0.5 } }}
-                    className="w-3/4 md:w-1/2 lg:w-1/3 h-full flex flex-col items-center justify-center">
-                    <div className="relative w-full h-1/3">
+                    className="w-3/4 md:w-1/3 py-24 h-full">
+                    <div className="relative w-full pt-[56.25%] pb-12 px-12">
                         <Image src="/about.jpg" fill className="rounded-lg object-cover" alt="Photo of Colin Lupe"/>
                         <div className="absolute top-0 left-0">
                             <button className="bg-white rounded-ee-lg text-black p-4 font-display text-sm uppercase">Hey, I&apos;m Colin</button>
                         </div>
                     </div>
-                    <div className="text-sm text-black font-display text-justify uppercase leading-8 pt-12">Colin Lupe is a creator, director, DP, cinematographer, and editor based in Los Angeles. Colin is best known for his work on Thank You, Goodnight: The Bon Jovi Story (2024), BS High (2023), and Two Distant Strangers (2020). He is honored to have received Emmy and Oscar awards for his work on Olympic campaign #StrongerTogether and Two Distant Strangers, respectively. Colin has worked with brands and artists such as Bon Jovi, Lizzo, Nike, Olipop, Meta, Naked Cashmere, and others. Specializing in many aspects of the film industry, Colin is thrilled to get to work on a vast range of projects.</div>
+                    <div className="text-sm text-black font-display text-justify uppercase leading-8 pt-6 pb-12">Colin Lupe is a creator, director, DP, cinematographer, and editor based in Los Angeles. Colin is best known for his work on Thank You, Goodnight: The Bon Jovi Story (2024), BS High (2023), and Two Distant Strangers (2020). He is honored to have received Emmy and Oscar awards for his work on Olympic campaign #StrongerTogether and Two Distant Strangers, respectively. Colin has worked with brands and artists such as Bon Jovi, Lizzo, Nike, Olipop, Meta, Naked Cashmere, and others. Specializing in many aspects of the film industry, Colin is thrilled to get to work on a vast range of projects.</div>
                 </motion.div>
             </div>
 
