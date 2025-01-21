@@ -65,7 +65,7 @@ export default function Lizzo({ open, toggle }) {
                             className="absolute top-0 left-0 w-full h-full"
                         ></iframe>
                     </div>
-                    <div className="text-sm font-display uppercase leading-8 text-center p6-6 py-12">
+                    <div className="text-sm font-display uppercase leading-8 text-center pt-6 pb-12">
                         <div className="text-lg pb-6">Fitness</div>
                         Director: Quinn Wilson <br />
                         Director of Photography: Andy Madeleine <br />
