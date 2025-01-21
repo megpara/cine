@@ -7,6 +7,11 @@
   src: url('/fonts/gobold-thin.otf');
 }
 
+@font-face {
+  font-family: 'gobold-high-thin';
+  src: url('/fonts/gobold-high-thin.otf');
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

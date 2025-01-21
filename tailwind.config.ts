@@ -13,9 +13,19 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      animation: {
+        blink: 'blink 2s steps(2, start) infinite',
+      },
+      keyframes: {
+        blink: {
+          '0%, 100%': { textTransform: 'uppercase' },
+          '50%': { textTransform: 'unset' },
+        }
+      }
     },
     fontFamily: {
-      'display': ["gobold-thin"]
+      'display': ["gobold-thin"],
+      'banner': ["gobold-high-thin"]
     },
   },
   plugins: [],
