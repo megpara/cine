@@ -45,14 +45,14 @@ export default function AboutModal({ open, toggle }) {
                 <HeaderBlack toggle={toggle} aboutOpen={open} />
             </div>
 
-            <div className="content flex flex-col items-center justify-center z-60 w-screen h-screen">
+            <div className="content flex flex-col items-center z-60 w-screen h-screen overflow-scroll">
                 <motion.div 
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 50, transition: { duration: 0.5 } }}
-                    className="w-[500px]">
-                    <div className="relative">
-                        <Image src="/about.jpg" width={500} height={500} sizes="500px" className="rounded-lg" alt="Photo of Colin Lupe"/>
+                    className="w-3/4 md:w-1/2 lg:w-1/3 h-full flex flex-col items-center justify-center">
+                    <div className="relative w-full h-1/3">
+                        <Image src="/about.jpg" fill className="rounded-lg object-cover" alt="Photo of Colin Lupe"/>
                         <div className="absolute top-0 left-0">
                             <button className="bg-white rounded-ee-lg text-black p-4 font-display text-sm uppercase">Hey, I&apos;m Colin</button>
                         </div>
