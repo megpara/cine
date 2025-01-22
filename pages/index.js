@@ -107,9 +107,6 @@ export default function Home() {
     const [showTds1, setShowTds1] = useState(false);
     const [showTds2, setShowTds2] = useState(false);
     const [showTds3, setShowTds3] = useState(false);
-    const [showDj1, setShowDj1] = useState(false);
-    const [showDj2, setShowDj2] = useState(false);
-    const [showDj3, setShowDj3] = useState(false);
     const [showTv, setShowTv] = useState(false);
     const [showWiz1, setShowWiz1] = useState(false);
     const [showWiz2, setShowWiz2] = useState(false);
@@ -168,24 +165,6 @@ export default function Home() {
             setShowTds3(true);
         } else {
             setShowTds3(false);
-        }
-
-        if ( latest > 0.7 && latest < 0.75 ) {
-            setShowDj1(true);
-        } else {
-            setShowDj1(false);
-        }
-
-        if ( latest > 0.75 && latest < 0.8 ) {
-            setShowDj2(true);
-        } else {
-            setShowDj2(false);
-        }
-
-        if ( latest > 0.8 && latest < 0.85 ) {
-            setShowDj3(true);
-        } else {
-            setShowDj3(false);
         }
 
         if ( latest > 0.75 && latest < 0.85 ) {
@@ -361,20 +340,16 @@ export default function Home() {
             {/* STILL IMAGES */}
             
             <div className="absolute top-0 left-0 w-screen h-screen z-30">
-            {/* <img src="stills/crop.png" className="absolute w-full h-full top-0 left-0 z-20" /> */}
             {showCreator && <NextImage src="/stills/creator.png" fill className="object-cover"/>}
             {showOverhead1 && <NextImage src="/stills/overhead1.png" fill className="object-cover"/>}
             {showOverhead2 && <NextImage src="/stills/overhead2.png" fill className="object-cover"/>}
-            {showOverhead3 && <NextImage src="/stills/overhead3.png" fill className="object-cover object-right"/>}
+            {showOverhead3 && <NextImage src="/stills/overhead3.png" fill className="object-cover"/>}
             {showTds1 && <NextImage src="/stills/tds1.png" fill className="object-cover"/>}
             {showTds2 && <NextImage src="/stills/tds2.png" fill className="object-cover"/>}
             {showTds3 && <NextImage src="/stills/tds3.png" fill className="object-cover"/>}
-            {/* {showDj1 && <img src="stills/dj1.png" fill/>}
-            {showDj2 && <img src="stills/dj2.png" fill/>}
-            {showDj3 && <img src="stills/dj3.png" fill/>} */}
-            {showWiz1 && <NextImage src="/stills/wiz1.png" fill className="object-cover object-right"/>}
-            {showWiz2 && <NextImage src="/stills/wiz2.png" fill className="object-cover object-right"/>}
-            {showLizzo && <NextImage src="/stills/lizzo.png" fill className="object-cover object-right"/>}
+            {showWiz1 && <NextImage src="/stills/wiz1.png" fill className="object-cover"/>}
+            {showWiz2 && <NextImage src="/stills/wiz2.png" fill className="object-cover"/>}
+            {showLizzo && <NextImage src="/stills/lizzo.png" fill className="object-cover"/>}
             {showMonitor && <video autoPlay muted loop playsInline src="stills/Monitor-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
             {showTv && <video autoPlay muted loop playsInline src="stills/TV-1-hevc-safari.mp4" className="absolute top-0 left-0 w-screen h-screen object-contain z-30"/>}
             </div>
