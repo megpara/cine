@@ -359,7 +359,7 @@ export default function Home() {
             {/* CREATOR */}
             
             {playCreator && (
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-2xl md:text-4xl text-white font-display z-50 px-4 md:px-16 py-24"}>
                 <div className="flex flex-col justify-between">
                     <button onClick={() => toggleEssentials()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">The Non-Essentials</button>
                 </div>
@@ -371,7 +371,7 @@ export default function Home() {
             
             {/* DIRECTOR */}
             {playDirector && (
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-2xl md:text-4xl text-white font-display z-50 px-4 md:px-16 py-24"}>
                 <div className="flex flex-col justify-between">
                     <button onClick={() => toggleOlipop()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Olipop</button>
                     <Link href="" onClick={() => toggleNike()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Nike</Link>
@@ -385,7 +385,7 @@ export default function Home() {
             
             {/* CINEMATOGRAPHER */}
             {playCine && (
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-2xl md:text-4xl text-white font-display z-50 px-4 md:px-16 py-24"}>
                 <div className="flex flex-col justify-between">
                     <button onClick={() => toggleBsHighOpen()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">BS High</button>
                     <button onClick={() => toggleBonJoviOpen()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Bon Jovi</button>
@@ -399,7 +399,7 @@ export default function Home() {
 
             {/* EDITOR */}
             {playEditor && (
-            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-4xl text-white font-display z-50 px-16 py-24"}>
+            <div className={"absolute top-0 left-0 w-screen h-screen flex justify-between text-2xl md:text-4xl text-white font-display z-50 px-4 md:px-16 py-24"}>
                 <div className="flex flex-col justify-between">
                     <button onClick={() => toggleOlympics()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Olympics</button>
                     <button onClick={() => toggleTrailers()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:cursor-none">Trailers</button>
