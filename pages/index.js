@@ -186,7 +186,7 @@ export default function Home() {
                 scrub: 1,
                 snap: {
                     snapTo: [0, 0.07644, 0.3844, 0.69236, 1],
-                    duration: 1.5,
+                    duration: 1,
                     delay: 0,
                     ease: "power1.inOut",
                 },
