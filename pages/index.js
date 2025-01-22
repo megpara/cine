@@ -1,7 +1,7 @@
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useMotionValue, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { useMotionValue, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
 import Button from "../components/Button";
 import WatchCursor from "../components/WatchCursor";
@@ -328,10 +328,6 @@ export default function Home() {
             <div className="fixed w-screen top-0 bg-black z-20 h-[60px]"></div>
             <div className="fixed w-screen bottom-0 bg-black z-20 h-[60px]"></div>
 
-            {/* SCROLL  */}
-
-            {showScroll && <Button>Scroll</Button>}
-
             {/* CURSOR */}
 
             {showCursor && <WatchCursor />}
@@ -503,6 +499,9 @@ export default function Home() {
         <Meta open={metaOpen} toggle={toggleMeta} />
         <Shorts open={shortsOpen} toggle={toggleShorts} />
         <NakedCashmere open={nakedOpen} toggle={toggleNaked} />
+                    
+        {/* SCROLL  */}
+        {showScroll && <Button>Scroll</Button>}
         </div>
     )
 }

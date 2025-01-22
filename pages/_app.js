@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
         />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+          content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, interactive-widget=resizes-content"
         />
         <link rel="stylesheet" href="https://use.typekit.net/oev0dtt.css" />
         <meta property="og:title" content="COLIN LUPE" key="ogtitle" />
