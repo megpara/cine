@@ -226,6 +226,12 @@ export default function Home() {
                 let sections = gsap.utils.toArray(".panel");
                 const containerWidth = document.querySelector(".container").offsetWidth;
     
+                ScrollTrigger.defaults({
+                    markers: false, // Disable debug markers for better performance
+                    fastScrollEnd: true, // Ends scrolling quickly on touch devices
+                    preventOverlaps: true, // Prevent animations from overlapping on fast scrolls
+                });
+
                 gsap.to(sections, {
                     xPercent: -100 * 3.2475,
                     ease: "none",
@@ -236,6 +242,9 @@ export default function Home() {
                         scrub: 1,
                         snap: {
                             snapTo: [0, 0.07644, 0.3844, 0.69236, 1],
+                            duration: 1.5,
+                            delay: 0,
+                            ease: "power1.inOut",
                         },
                         start: "top top",
                         end: `+=${containerWidth}`,
@@ -410,7 +419,7 @@ export default function Home() {
             {/* TITLES AND REELS */}
 
             {/* CREATOR */}
-            <div className="panel w-[133vw] h-screen relative">
+            <div className="panel w-[133vw] h-screen relative" style={{willChange: "transform"}}>
                 <div className="absolute top-0 left-0 w-full h-full flex">
                     {/* CREATOR TITLE */}
                     <div className="w-[33vw] h-screen relative">
