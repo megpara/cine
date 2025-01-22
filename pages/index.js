@@ -41,6 +41,23 @@ export default function Home() {
         setShowViewCursor(false);
     };
 
+    useEffect(() => {
+        const scrollFactor = 0.5; // Adjust the factor to slow down the scroll
+    
+        const handleWheel = (e) => {
+          e.preventDefault();
+          window.scrollBy(0, e.deltaY * scrollFactor);
+        };
+    
+        // Attach the event listener
+        window.addEventListener('wheel', handleWheel, { passive: false });
+    
+        // Cleanup the event listener when the component unmounts
+        return () => {
+          window.removeEventListener('wheel', handleWheel);
+        };
+      }, []);
+
     const [showScroll, setShowScroll] = useState(true);
     const [playCreator, setPlayCreator] = useState(false);
     const [playDirector, setPlayDirector] = useState(false);
@@ -59,7 +76,7 @@ export default function Home() {
     const [showWiz2, setShowWiz2] = useState(false);
     const [showLizzo, setShowLizzo] = useState(false);
 
-        useMotionValueEvent(yPosition, "change", (latest) => {
+    useMotionValueEvent(yPosition, "change", (latest) => {
         if ( latest < 0.001 ) {
             setShowScroll(true);
         } else {
@@ -170,6 +187,8 @@ export default function Home() {
         let sections = gsap.utils.toArray(".panel");
         const containerWidth = document.querySelector(".container").offsetWidth;
 
+        const snapPoints = [0, 0.07644, 0.3844, 0.69236, 1];
+
         ScrollTrigger.defaults({
             markers: false, // Disable debug markers for better performance
             fastScrollEnd: true, // Ends scrolling quickly on touch devices
@@ -183,10 +202,16 @@ export default function Home() {
             scrollTrigger: {
                 trigger: document.querySelector(".container"),
                 pin: true,
-                scrub: 1,
+                scrub: 0,
                 snap: {
-                    snapTo: [0, 0.07644, 0.3844, 0.69236, 1],
-                    duration: 1,
+                    snapTo: (progress) => {
+                        // Find the closest snap point in the array
+                        const closest = snapPoints.reduce((prev, curr) =>
+                            Math.abs(curr - progress) < Math.abs(prev - progress) ? curr : prev
+                        );
+                        return closest; // Return the closest snap point
+                    },
+                    duration: 0.8,
                     delay: 0,
                     ease: "power1.inOut",
                 },
