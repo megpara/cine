@@ -41,59 +41,6 @@ export default function Home() {
         setShowViewCursor(false);
     };
 
-    const [loadingProgress, setLoadingProgress] = useState(0);
-    const [isLoaded, setIsLoaded] = useState(false);
-    // const [isLoaded, setIsLoaded] = useState(true);
-
-    const assets = [
-        "/stills/overhead1.png",
-        "/stills/overhead2.png",
-        "/stills/overhead3.png",
-        "/stills/tds1.png",
-        "/stills/tds2.png",
-        "/stills/tds3.png",
-        "/stills/wiz1.png",
-        "/stills/wiz2.png",
-        "/stills/lizzo.png",
-        "/stills/Monitor-hevc-safari.mp4",
-        "/stills/TV-1-hevc-safari.mp4",
-    ];
-
-    useEffect(() => {
-        let loadedAssets = 0;
-
-        const handleAssetLoad = () => {
-            loadedAssets += 1;
-            setLoadingProgress(Math.round((loadedAssets / assets.length) * 100));
-            if (loadedAssets === assets.length) {
-                setTimeout(() => setIsLoaded(true), 500); // Slight delay for a smoother transition
-            }
-        };
-
-        const handleAssetError = (asset) => {
-            console.error(`Failed to load asset: ${asset}`);
-            loadedAssets += 1; // Still count as "loaded" to prevent hanging
-            setLoadingProgress(Math.round((loadedAssets / assets.length) * 100));
-            if (loadedAssets === assets.length) {
-                setTimeout(() => setIsLoaded(true), 500);
-            }
-        };
-
-        assets.forEach((asset) => {
-            if (asset.endsWith(".mp4")) {
-                const video = document.createElement("video");
-                video.src = asset;
-                video.onloadeddata = handleAssetLoad;
-                video.onerror = () => handleAssetError(asset);
-            } else {
-                const img = new Image();
-                img.src = asset;
-                img.onload = handleAssetLoad;
-                img.onerror = () => handleAssetError(asset);
-            }
-        });
-    }, []);
-
     const [showScroll, setShowScroll] = useState(true);
     const [playCreator, setPlayCreator] = useState(false);
     const [playDirector, setPlayDirector] = useState(false);
@@ -219,44 +166,37 @@ export default function Home() {
     });
 
     useEffect(() => {
-        const checkLoadingInterval = setInterval(() => {
-            if (isLoaded) {
-                gsap.registerPlugin(ScrollTrigger);
-                let sections = gsap.utils.toArray(".panel");
-                const containerWidth = document.querySelector(".container").offsetWidth;
-    
-                ScrollTrigger.defaults({
-                    markers: false, // Disable debug markers for better performance
-                    fastScrollEnd: true, // Ends scrolling quickly on touch devices
-                    preventOverlaps: true, // Prevent animations from overlapping on fast scrolls
-                });
+        gsap.registerPlugin(ScrollTrigger);
+        let sections = gsap.utils.toArray(".panel");
+        const containerWidth = document.querySelector(".container").offsetWidth;
 
-                gsap.to(sections, {
-                    xPercent: -100 * 3.2475,
-                    ease: "none",
-                    duration: 0.5,
-                    scrollTrigger: {
-                        trigger: document.querySelector(".container"),
-                        pin: true,
-                        scrub: 1,
-                        snap: {
-                            snapTo: [0, 0.07644, 0.3844, 0.69236, 1],
-                            duration: 1.5,
-                            delay: 0,
-                            ease: "power1.inOut",
-                        },
-                        start: "top top",
-                        end: `+=${containerWidth}`,
-                        onUpdate: (self) => yPosition.set(self.progress),
-                    },
-                });
-                gsap.from(".panel", { duration: 1, opacity: 0, y: 50, delay: 0.5 });
-    
-                // Clear the interval after loading is complete
-                clearInterval(checkLoadingInterval);
-            }
-        }, 100); // Check every 100ms until `isLoaded` is true
-    }, [isLoaded]);    
+        ScrollTrigger.defaults({
+            markers: false, // Disable debug markers for better performance
+            fastScrollEnd: true, // Ends scrolling quickly on touch devices
+            preventOverlaps: true, // Prevent animations from overlapping on fast scrolls
+        });
+
+        gsap.to(sections, {
+            xPercent: -100 * 3.2475,
+            ease: "none",
+            duration: 0.5,
+            scrollTrigger: {
+                trigger: document.querySelector(".container"),
+                pin: true,
+                scrub: 1,
+                snap: {
+                    snapTo: [0, 0.07644, 0.3844, 0.69236, 1],
+                    duration: 1.5,
+                    delay: 0,
+                    ease: "power1.inOut",
+                },
+                start: "top top",
+                end: `+=${containerWidth}`,
+                onUpdate: (self) => yPosition.set(self.progress),
+            },
+        });
+        gsap.from(".panel", { duration: 1, opacity: 0, y: 50, delay: 0.5 });
+    }, []);    
 
     // WATCH MODALS
     const [movementOpen, setMovementOpen] = useState(false);
@@ -312,20 +252,6 @@ export default function Home() {
     const toggleNaked = () => {
         setNakedOpen(!nakedOpen);
     };
-
-    if (!isLoaded) {
-        return (
-            <div className="fixed inset-0 flex flex-col items-center justify-center bg-black text-white">
-                <div className="text-base uppercase font-display">Loading {loadingProgress}%</div>
-                <div className="w-64 h-2 bg-gray-800 rounded-full mt-4 overflow-hidden">
-                    <div
-                        className="h-full bg-[#2700f9]"
-                        style={{ width: `${loadingProgress}%` }}
-                    ></div>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div>
