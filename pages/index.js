@@ -24,8 +24,22 @@ import NakedCashmere from "../components/videoModals/NakedCashmere";
 export default function Home() {
 
     const yPosition = useMotionValue(0);
+    const [isMobile, setIsMobile] = useState(false);
     const [showCursor, setShowCursor] = useState(false);
     const [showViewCursor, setShowViewCursor] = useState(false);
+
+    useEffect(() => {
+        const updateIsMobile = () => {
+            setIsMobile(window.innerWidth <= 768); // Adjust breakpoint for mobile devices
+        };
+
+        updateIsMobile();
+        window.addEventListener("resize", updateIsMobile);
+
+        return () => {
+            window.removeEventListener("resize", updateIsMobile);
+        };
+    }, []);
 
     const handleMouseEnter = () => {
         setShowCursor(true);
@@ -185,9 +199,7 @@ export default function Home() {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
         let sections = gsap.utils.toArray(".panel");
-        const containerWidth = document.querySelector(".container").offsetWidth;
-
-        const snapPoints = [0, 0.07644, 0.3844, 0.69236, 1];
+        const container = document.querySelector(".container");
 
         ScrollTrigger.defaults({
             markers: false, // Disable debug markers for better performance
@@ -195,33 +207,69 @@ export default function Home() {
             preventOverlaps: true, // Prevent animations from overlapping on fast scrolls
         });
 
-        gsap.to(sections, {
-            xPercent: -100 * 3.2475,
-            ease: "none",
-            duration: 0.5,
-            scrollTrigger: {
-                trigger: document.querySelector(".container"),
-                pin: true,
-                scrub: 0,
-                snap: {
-                    snapTo: (progress) => {
-                        // Find the closest snap point in the array
-                        const closest = snapPoints.reduce((prev, curr) =>
-                            Math.abs(curr - progress) < Math.abs(prev - progress) ? curr : prev
-                        );
-                        return closest; // Return the closest snap point
+        if (isMobile) {
+            // Vertical scroll on mobile
+            const snapPoints = [0, 0.07644, 0.3844, 0.69236, 1];
+
+            gsap.to(sections, {
+                yPercent: -100 * 3.2475,
+                ease: "none",
+                duration: 0.5,
+                scrollTrigger: {
+                    trigger: container,
+                    pin: true,
+                    scrub: 0.5,
+                    snap: {
+                        snapTo: (progress) => {
+                            const closest = snapPoints.reduce((prev, curr) =>
+                                Math.abs(curr - progress) < Math.abs(prev - progress) ? curr : prev
+                            );
+                            return closest;
+                        },
+                        duration: 0.8,
+                        ease: "power1.inOut",
                     },
-                    duration: 0.8,
-                    delay: 0,
-                    ease: "power1.inOut",
+                    start: "top top",
+                    end: `+=${sections.length * window.innerHeight}`,
+                    onUpdate: (self) => yPosition.set(self.progress),
                 },
-                start: "top top",
-                end: `+=${containerWidth}`,
-                onUpdate: (self) => yPosition.set(self.progress),
-            },
-        });
-        gsap.from(".panel", { duration: 1, opacity: 0, y: 50, delay: 0.5 });
-    }, []);    
+            });
+        } else {
+            const containerWidth = document.querySelector(".container").offsetWidth;
+            const snapPoints = [0, 0.07644, 0.3844, 0.69236, 1];
+
+            gsap.to(sections, {
+                xPercent: -100 * 3.2475,
+                ease: "none",
+                duration: 0.5,
+                scrollTrigger: {
+                    trigger: document.querySelector(".container"),
+                    pin: true,
+                    scrub: 0,
+                    snap: {
+                        snapTo: (progress) => {
+                            // Find the closest snap point in the array
+                            const closest = snapPoints.reduce((prev, curr) =>
+                                Math.abs(curr - progress) < Math.abs(prev - progress) ? curr : prev
+                            );
+                            return closest; // Return the closest snap point
+                        },
+                        duration: 0.8,
+                        delay: 0,
+                        ease: "power1.inOut",
+                    },
+                    start: "top top",
+                    end: `+=${containerWidth}`,
+                    onUpdate: (self) => yPosition.set(self.progress),
+                },
+            });
+        }
+        // gsap.from(".panel", { duration: 1, opacity: 0, y: 50, delay: 0.5 });
+        
+        return () => {
+            ScrollTrigger.killAll(); // Clean up ScrollTrigger
+        };
+    }, [isMobile]);
 
     // WATCH MODALS
     const [movementOpen, setMovementOpen] = useState(false);
@@ -280,12 +328,15 @@ export default function Home() {
 
     return (
         <div>
-        <div className="container flex w-[533.32vw] max-w-[533.32vw] overflow-x-hidden overflow-y-auto">
+        {/* <div className="container flex w-[533.32vw] max-w-[533.32vw] overflow-x-hidden overflow-y-auto"> */}
+        <div className={`container ${
+                    isMobile ? "flex flex-col h-[533.32vh] max-h-[533.32vh]" : "flex w-[533.32vw] max-w-[533.32vw]"
+                } overflow-hidden`} >
 
             {/* CROP */}
+            {!isMobile && <div className="fixed w-screen top-0 bg-black z-20 h-[60px]" />}
+            {!isMobile && <div className="fixed w-screen bottom-0 bg-black z-20 h-[60px]" />}
 
-            <div className="fixed w-screen top-0 bg-black z-20 h-[60px]"></div>
-            <div className="fixed w-screen bottom-0 bg-black z-20 h-[60px]"></div>
 
             {/* CURSOR */}
 
@@ -369,14 +420,14 @@ export default function Home() {
             {/* TITLES AND REELS */}
 
             {/* CREATOR */}
-            <div className="panel w-[133vw] h-screen relative" style={{willChange: "transform"}}>
-                <div className="absolute top-0 left-0 w-full h-full flex">
+            <div className={`panel ${isMobile ? "h-[133vh] w-screen" : "w-[133vw] h-screen"} relative`} style={{willChange: "transform"}}>
+                <div className={`absolute top-0 left-0 w-full h-full flex ${isMobile ? " flex-col" : ""}`}>
                     {/* CREATOR TITLE */}
-                    <div className="w-[33vw] h-screen relative">
+                    <div className={`${isMobile ? "h-[33vh] w-screen" : "w-[33vw] h-screen"} relative`}>
                         <video className="absolute top-0 left-0 w-full h-full object-cover border-x-[5px] border-black" muted autoPlay loop playsInline preload="auto" src="/creator_banner.mp4" />
-                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none text-white">Creator</div>
+                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink text-white">Creator</div>
                     </div>
-                    <div className="w-[100vw] h-screen reel relative">
+                    <div className={`${isMobile ? "h-[100vh] w-screen" : "w-[100vw] h-screen"} reel relative`}>
                         {/* CREATOR STILL */}
                         <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline preload="auto" src="/creator_still.mp4" />
                         {/* CREATOR REEL */}
@@ -388,14 +439,14 @@ export default function Home() {
             </div>
 
             {/* DIRECTOR */}
-            <div className="panel w-[133vw] h-screen relative">
-                <div className="absolute top-0 left-0 w-full h-full flex">
+            <div className={`panel ${isMobile ? "h-[133vh] w-screen" : "w-[133vw] h-screen"} relative`}>
+                <div className={`absolute top-0 left-0 w-full h-full flex ${isMobile ? " flex-col" : ""}`}>
                     {/* DIRECTOR TITLE */}
-                    <div className="w-[33vw] h-screen relative">
+                    <div className={`${isMobile ? "h-[33vh] w-screen" : "w-[33vw] h-screen"} relative`}>
                         <video className="absolute top-0 left-0 w-full h-full object-cover border-x-[5px] border-black" muted autoPlay loop playsInline preload="auto" src="/director_banner.mp4" />
-                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none text-white">Director</div>
+                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink text-white">Director</div>
                     </div>
-                    <div className="w-[100vw] h-screen reel relative">
+                    <div className={`${isMobile ? "h-[100vh] w-screen" : "w-[100vw] h-screen"} reel relative`}>
                         {/* DIRECTOR STILL */}
                         <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline preload="auto" src="/directing_still.mp4" />
                         {/* DIRECTOR REEL */}
@@ -407,14 +458,14 @@ export default function Home() {
             </div>
 
             {/* CINEMATOGRAPHER */}
-            <div className="panel w-[133vw] h-screen relative">
-                <div className="absolute top-0 left-0 w-full h-full flex">
+            <div className={`panel ${isMobile ? "h-[133vh] w-screen" : "w-[133vw] h-screen"} relative`}>
+                <div className={`absolute top-0 left-0 w-full h-full flex ${isMobile ? " flex-col" : ""}`}>
                     {/* CINEMATOGRAPHER TITLE */}
-                    <div className="w-[33vw] h-screen relative">
+                    <div className={`${isMobile ? "h-[33vh] w-screen" : "w-[33vw] h-screen"} relative`}>
                         <video className="absolute top-0 left-0 w-full h-full object-cover border-x-[5px] border-black" muted autoPlay loop playsInline preload="auto" src="/cine_banner.mp4" />
-                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none text-white">Cinematographer</div>
+                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink text-white">Cinematographer</div>
                     </div>
-                    <div className="w-[100vw] h-screen reel relative">
+                    <div className={`${isMobile ? "h-[100vh] w-screen" : "w-[100vw] h-screen"} reel relative`}>
                         {/* CINEMATOGRAPHER STILL */}
                         <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline preload="auto" src="/cine_still.mp4" />
                         {/* CINEMATOGRAPHER REEL */}
@@ -426,14 +477,14 @@ export default function Home() {
             </div>
 
             {/* EDITOR */}
-            <div className="panel w-[133vw] h-screen relative">
-                <div className="absolute top-0 left-0 w-full h-full flex">
+            <div className={`panel ${isMobile ? "h-[133vh] w-screen" : "w-[133vw] h-screen"} relative`}>
+                <div className={`absolute top-0 left-0 w-full h-full flex ${isMobile ? " flex-col" : ""}`}>
                     {/* EDITOR TITLE */}
-                    <div className="w-[33vw] h-screen relative">
+                    <div className={`${isMobile ? "h-[33vh] w-screen" : "w-[33vw] h-screen"} relative`}>
                         <video className="absolute top-0 left-0 w-full h-full object-cover border-x-[5px] border-black" muted autoPlay loop playsInline preload="auto" src="/editor_banner.mp4" />
-                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink transform -rotate-90 lg:transform-none text-white">Editor</div>
+                        <div className="absolute top-0 left-0 w-full h-full object-cover flex flex-col items-center justify-center text-7xl xl:text-8xl font-banner animate-blink text-white">Editor</div>
                     </div>
-                    <div className="w-[100vw] h-screen reel relative">
+                    <div className={`${isMobile ? "h-[100vh] w-screen" : "w-[100vw] h-screen"} reel relative`}>
                         {/* EDITOR STILL */}
                         <video className="absolute top-0 left-0 w-full h-full object-cover" muted autoPlay loop playsInline preload="auto" src="/editing_still.mp4" />
                         {/* EDITOR REEL */}
